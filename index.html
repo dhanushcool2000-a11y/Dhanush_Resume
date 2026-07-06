@@ -6,7 +6,7 @@
 <title>Dhanush R · Visual Designer, SaaS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,450&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,450&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg: #EBE6D8;
@@ -20,6 +20,7 @@
     --teal-dim: #C9D1B3;
     --amber: #A9772E;
     --green-light: #4C7A44;
+    --aqua: #4FD1B0;
     --overlay: rgba(247,243,231,0.85);
     --radius: 20px;
     --measure: 640px;
@@ -146,7 +147,23 @@
     position:relative;
     z-index:1;
   }
+  .hero-waves{
+    position:absolute;
+    top:-32px; left:-32px; right:-32px; bottom:-24px;
+    z-index:0;
+    overflow:hidden;
+    border-radius:32px;
+    pointer-events:none;
+    background:
+      linear-gradient(115deg, transparent 18%, rgba(196,218,232,0.4) 30%, transparent 44%),
+      linear-gradient(100deg, transparent 52%, rgba(222,205,228,0.32) 64%, transparent 78%),
+      linear-gradient(128deg, transparent 4%, rgba(232,218,190,0.28) 14%, transparent 27%),
+      linear-gradient(105deg, transparent 68%, rgba(196,222,208,0.3) 80%, transparent 92%);
+    filter: blur(22px);
+  }
   .hero-grid{
+    position:relative;
+    z-index:1;
     display:grid;
     grid-template-columns: 1.3fr 0.7fr;
     gap:40px;
@@ -167,20 +184,29 @@
   }
   .hi-tag{
     position:absolute;
-    top:-16px; left:-16px;
-    width:52px; height:52px;
-    border-radius:50%;
+    top:14px; right:-38px;
+    padding:8px 18px 10px;
     background:var(--surface);
     border:1px solid var(--hairline);
+    border-radius:18px 18px 18px 4px;
     display:flex; align-items:center; justify-content:center;
-    font-family:'Fraunces', serif;
-    font-style:italic;
-    font-weight:500;
-    font-size:21px;
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    font-size:26px;
+    line-height:1;
     color:var(--teal);
-    transform:rotate(-9deg);
+    transform:rotate(-3deg);
     box-shadow:0 6px 16px rgba(40,55,35,0.10);
     z-index:2;
+  }
+  .hi-tag::after{
+    content:"";
+    position:absolute;
+    left:6px; bottom:-7px;
+    width:0; height:0;
+    border-style:solid;
+    border-width:8px 0 0 9px;
+    border-color:transparent transparent transparent var(--surface);
   }
   .hero-photo-frame img{
     width:100%; height:100%; object-fit:cover; object-position:center; display:block;
@@ -245,6 +271,8 @@
 
   /* ---------- brand strip — signature element ---------- */
   .brand-strip{
+    position:relative;
+    z-index:1;
     margin-top:44px;
     border-top:1px solid var(--hairline);
     border-bottom:1px solid var(--hairline);
@@ -335,13 +363,17 @@
     margin-bottom:6px;
   }
   .role-title{font-size:18px; font-weight:600;}
-  .role-company{color:var(--green-light); font-weight:500;}
+  .role-meta{
+    display:flex; flex-wrap:nowrap; align-items:baseline; gap:14px;
+    margin-left:auto;
+  }
+  .role-company{color:var(--green-light); font-weight:500; white-space:nowrap;}
   .role-dates{
     font-family:'IBM Plex Mono', monospace;
     font-size:13px;
     font-weight:600;
     color:var(--green-light);
-    margin-left:auto;
+    white-space:nowrap;
   }
   .role ul{
     list-style:none;
@@ -414,11 +446,15 @@
 
   /* footer / contact */
   footer{
-    padding:72px 0 56px;
+    padding:80px 0 64px;
     text-align:center;
     position:relative;
     z-index:1;
+    background:transparent;
+    border-top:1px solid var(--hairline);
+    margin-top:0;
   }
+  footer .eyebrow{color:var(--text-faint);}
   footer h2{
     font-family:'Fraunces', serif;
     font-weight:450;
@@ -433,13 +469,14 @@
   .contact-btn{
     display:inline-flex; align-items:center; gap:10px;
     background:var(--teal);
-    color:#F7F3E7;
+    color:var(--bg);
     font-weight:600;
     font-size:14.5px;
-    padding:14px 26px;
-    border-radius:var(--radius);
+    padding:14px 30px;
+    border-radius:999px;
+    transition: background 0.15s ease, transform 0.15s ease;
   }
-  .contact-btn:hover{background:#3fc0a0; text-decoration:none;}
+  .contact-btn:hover{background:#3E5C34; text-decoration:none;}
   .footer-links{
     margin-top:36px;
     display:flex; justify-content:center; gap:22px;
@@ -448,7 +485,12 @@
     color:var(--text-faint);
   }
   .footer-links a{color:var(--text-muted);}
+  .footer-links a:hover{color:var(--teal);}
   .foot-note{margin-top:40px; font-size:11.5px; color:var(--text-faint); font-family:'IBM Plex Mono', monospace;}
+  @media (max-width:760px){
+    footer{text-align:left; padding:56px 0 40px;}
+    .footer-links{justify-content:flex-start;}
+  }
 </style>
 </head>
 <body>
@@ -468,8 +510,8 @@
   <span class="glass glass-circle glass-6" aria-hidden="true"></span>
   <span class="glass-cluster" aria-hidden="true"><span></span><span></span><span></span></span>
 
-
   <header class="hero">
+    <div class="hero-waves" aria-hidden="true"></div>
     <div class="hero-grid">
       <div class="hero-text">
         <p class="eyebrow hero-eyebrow">Visual Designer · SaaS</p>
@@ -482,6 +524,7 @@
           <a href="https://www.figma.com/design/1iw99nx7U6s5R2z9Y4FWi8/R-Dhanush---Design-Portfolio--Copy-?node-id=9-12794&t=tkXt3q81y8Ix6eU6-1" target="_blank" rel="noopener">Portfolio <span class="arrow">↗</span></a>
           <a href="https://dribbble.com/ItsDhanush" target="_blank" rel="noopener">Dribbble <span class="arrow">↗</span></a>
           <a href="https://www.behance.net/dhanushmannar" target="_blank" rel="noopener">Behance <span class="arrow">↗</span></a>
+          <a href="https://drive.google.com/drive/folders/11pLwm8XUBx7h72o_psgQ38teVqABs90q?usp=sharing" target="_blank" rel="noopener">Resume PDF <span class="arrow">↗</span></a>
         </div>
       </div>
       <div class="hero-photo-wrap">
@@ -501,7 +544,7 @@
   </header>
 
   <section id="about" class="reveal">
-    <div class="section-head"><span class="num">01</span><h2 class="section-title">About</h2></div>
+    <div class="section-head"><span class="num">01</span><h2 class="section-title">About Me</h2></div>
     <div class="about-body">
       <p>Most visual designers own the look. I own the system underneath it: the guidelines, templates, and visual logic that let marketing, product, and sales teams ship on-brand work without routing every asset through a designer. That's the gap I specialize in closing at fast-scaling SaaS companies.</p>
       <p>Day to day, that means turning dense product logic into pitch decks, landing pages, and campaigns that a prospect understands in seconds. It also means building the underlying system so the next version of that asset takes hours, not days, for whoever builds it next.</p>
@@ -524,14 +567,16 @@
       <div class="role">
         <div class="role-header">
           <span class="role-title">Visual Designer</span>
-          <span class="role-company">@ Growfin</span>
-          <span class="role-dates">May 2023 – Jul 2026</span>
+          <span class="role-meta">
+            <span class="role-company">@ Growfin</span>
+            <span class="role-dates">May 2023 – Jul 2026</span>
+          </span>
         </div>
         <ul>
-          <li>Owned and maintained brand-wide visual systems across marketing, sales enablement, and product-facing assets in a fast-scaling SaaS environment.</li>
-          <li>Led design on product marketing and sales collateral: pitch decks, one-pagers, landing page visuals, social campaigns, and print materials, used across the full sales motion.</li>
+          <li>Owned and maintained brand-wide visual systems across marketing, sales enablement, and product-facing assets, supporting 14 active paid search campaigns and multiple growth experiments per quarter across paid social, email marketing, and more.</li>
+          <li>Led design on product marketing and sales collateral: pitch decks, one-pagers, landing page visuals, social campaigns, and print materials, supporting a pipeline that grew toward $4M ARR as part of Growfin's 0-to-1 journey.</li>
           <li>Partnered with marketing and product to define visual narratives that translated complex feature sets into value propositions prospects could grasp in seconds.</li>
-          <li>Built and standardized a visual guidelines system used as the default reference across teams, cutting one-off design requests and speeding up asset turnaround.</li>
+          <li>Created multiple templates that cut the Growth team's design dependency by almost 100% and reduced asset turnaround time by 50%.</li>
           <li>Strengthened brand perception through consistent typography, layout systems, and storytelling-led visuals that supported ongoing marketing and sales initiatives.</li>
         </ul>
       </div>
@@ -539,8 +584,10 @@
       <div class="role">
         <div class="role-header">
           <span class="role-title">Graphic Design Intern → Junior Graphic Designer</span>
-          <span class="role-company">@ Brand-D</span>
-          <span class="role-dates">May 2022 – Apr 2023</span>
+          <span class="role-meta">
+            <span class="role-company">@ Brand-D</span>
+            <span class="role-dates">May 2022 – Apr 2023</span>
+          </span>
         </div>
         <ul>
           <li>Developed corporate identities and brand guidelines for multiple client brands, ensuring consistency across digital and print media.</li>
@@ -554,8 +601,19 @@
     <p style="margin-top:36px; margin-left:34px; font-size:13px; color:var(--text-faint);">Also: Video Editor @ Loyola College (Sep–Nov 2019), early experience editing educational video content.</p>
   </section>
 
+  <section id="ai" class="reveal">
+    <div class="section-head"><span class="num">04</span><h2 class="section-title">Where AI Fit In</h2></div>
+    <div class="about-body">
+      <p>AI became part of the workflow at Growfin, but selectively, and always with a designer's judgment layered on top.</p>
+      <p>For presentations, webinars, and speaker sessions, everything stayed fully manual. Dense battlecards were the exception. I fed the underlying content to AI to generate a first-pass structure, tables, and layout scaffolding, then took over to refine it and add the polish and clarity a human eye brings. The goal was never to hand off the job. It was to offload the repetitive setup so more energy could go into the actual design thinking.</p>
+      <p>Blog banners for thought leadership and feature launches were the most automated part of the process. After months of illustrating them by hand, I trained the AI on Growfin's specific visual style and tone, then worked through each post's content with it in enough depth that it understood what the piece was actually saying. Over time, that meant less manual drawing and full visual consistency across a growing backlog of posts.</p>
+      <p>Social content stayed deliberately AI-free. Once the brand system was set, keeping an obvious human touch mattered more than speed, so templates were built and refined based on competitor research and where the product needed to push next.</p>
+      <p>Marketing collateral, including one-pagers, four-pagers, and brochures, followed the same principle. Sales and marketing needed to edit these constantly and on short notice, so I built the templates in Google Slides instead of Figma or Illustrator. That meant they could add their own content directly, export to PDF, and never touch a tool they didn't already know.</p>
+    </div>
+  </section>
+
   <section id="skills" class="reveal">
-    <div class="section-head"><span class="num">04</span><h2 class="section-title">Skills</h2></div>
+    <div class="section-head"><span class="num">05</span><h2 class="section-title">Skills</h2></div>
     <div class="skills-grid">
       <div class="skill-group">
         <h3>Design & Strategy</h3>
@@ -591,7 +649,7 @@
   </section>
 
   <section id="education" class="reveal">
-    <div class="section-head"><span class="num">05</span><h2 class="section-title">Education</h2></div>
+    <div class="section-head"><span class="num">06</span><h2 class="section-title">Education</h2></div>
     <div class="edu-list">
       <div class="edu-item">
         <div>
@@ -618,7 +676,7 @@
   </section>
 
   <section id="personal" class="reveal">
-    <div class="section-head"><span class="num">06</span><h2 class="section-title">When I'm Not Designing</h2></div>
+    <div class="section-head"><span class="num">07</span><h2 class="section-title">When I'm Not Designing</h2></div>
     <div class="about-body">
       <p>You'll usually find me running or walking in random circles and squares. Somehow, design manages to find me even when I'm taking a break. The gym is non-negotiable. I also listen to an unreasonable amount of music: classic rock, synth-pop, indie, you name it. I'm a total Tame Impala sucker. And when I'm not doing that, I'm trying to play the guitar. Trying, because I absolutely fumble my way through it.</p>
       <p>When all that's done, I'm probably helping my mom with chores or laundry. Once we wrap up, we settle in with a movie or a sitcom on TV, along with crunchy snacks and hot chocolate. It's our little weekend ritual.</p>
@@ -635,6 +693,7 @@
       <a href="https://www.figma.com/design/1iw99nx7U6s5R2z9Y4FWi8/R-Dhanush---Design-Portfolio--Copy-?node-id=9-12794&t=tkXt3q81y8Ix6eU6-1" target="_blank" rel="noopener">Portfolio</a>
       <a href="https://dribbble.com/ItsDhanush" target="_blank" rel="noopener">Dribbble</a>
       <a href="https://www.behance.net/dhanushmannar" target="_blank" rel="noopener">Behance</a>
+      <a href="https://drive.google.com/drive/folders/11pLwm8XUBx7h72o_psgQ38teVqABs90q?usp=sharing" target="_blank" rel="noopener">Resume PDF</a>
     </div>
     <p class="foot-note">Dhanush R · Visual Designer, SaaS</p>
   </footer>
